@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- عرض شجرة جلسات الدراسة -->
+        <record id="view_flashcard_session_tree" model="ir.ui.view">
+            <field name="name">flashcard.session.tree</field>
+            <field name="model">flashcard.session</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state=='completed'" decoration-warning="state=='in_progress'" decoration-muted="state=='draft'">
+                    <field name="name" string="Session Name"/>
+                    <field name="session_type" string="Type"/>
+                    <field name="state" string="Status"/>
+                    <field name="user_id" string="User"/>
+                    <field name="total_cards" string="Total Cards"/>
+                    <field name="completed_cards" string="Completed"/>
+                    <field name="correct_answers" string="Correct"/>
+                    <field name="session_score" string="Score (%)"/>
+                    <field name="start_time" string="Start Time"/>
+                    <field name="duration" string="Duration (min)"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- عرض نموذج جلسة الدراسة -->
+        <record id="view_flashcard_session_form" model="ir.ui.view">
+            <field name="name">flashcard.session.form</field>
+            <field name="model">flashcard.session</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_start_session" type="object" string="Start Session" 
+                                class="btn-primary" states="draft"/>
+                        <button name="action_end_session" type="object" string="End Session" 
+                                class="btn-secondary" states="in_progress"/>
+                        <button name="action_cancel_session" type="object" string="Cancel Session" 
+                                class="btn-danger" states="draft,in_progress"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,completed,cancelled"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" string="Session Name" placeholder="Enter session name..."/>
+                                <field name="session_type" string="Session Type"/>
+                                <field name="user_id" string="User"/>
+                            </group>
+                            <group>
+                                <field name="start_time" string="Start Time"/>
+                                <field name="end_time" string="End Time"/>
+                                <field name="duration" string="Duration (minutes)" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Session Statistics">
+                            <group>
+                                <field name="total_cards" string="Total Cards"/>
+                                <field name="completed_cards" string="Completed Cards"/>
+                                <field name="correct_answers" string="Correct Answers"/>
+                            </group>
+                            <group>
+                                <field name="session_score" string="Session Score (%)" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <!-- البطاقات في الجلسة -->
+                        <field name="card_ids" string="Cards in This Session">
+                            <tree>
+                                <field name="name" string="Question"/>
+                                <field name="category_id" string="Category"/>
+                                <field name="level" string="Level"/>
+                                <field name="review_count" string="Reviews"/>
+                                <field name="success_rate" string="Success Rate"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- عرض بحث جلسات الدراسة -->
+        <record id="view_flashcard_session_search" model="ir.ui.view">
+            <field name="name">flashcard.session.search</field>
+            <field name="model">flashcard.session</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Session Name"/>
+                    <field name="user_id" string="User"/>
+                    <field name="session_type" string="Session Type"/>
+                    
+                    <filter string="Review Sessions" name="review_sessions" domain="[('session_type','=','review')]"/>
+                    <filter string="Quiz Sessions" name="quiz_sessions" domain="[('session_type','=','quiz')]"/>
+                    
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="In Progress" name="in_progress" domain="[('state','=','in_progress')]"/>
+                    <filter string="Completed" name="completed" domain="[('state','=','completed')]"/>
+                    
+                    <filter string="My Sessions" name="my_sessions" domain="[('user_id','=',uid)]"/>
+                    <filter string="Today's Sessions" name="today_sessions" 
+                            domain="[('start_time','>=',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Session Type" name="group_by_type" context="{'group_by': 'session_type'}"/>
+                        <filter string="State" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="User" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                        <filter string="Date" name="group_by_date" context="{'group_by': 'start_time:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- عرض شجرة تقدم البطاقات -->
+        <record id="view_session_card_progress_tree" model="ir.ui.view">
+            <field name="name">session.card.progress.tree</field>
+            <field name="model">session.card.progress</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="is_correct" decoration-danger="not is_correct">
+                    <field name="session_id" string="Session"/>
+                    <field name="card_id" string="Card"/>
+                    <field name="user_answer" string="User Answer"/>
+                    <field name="is_correct" string="Correct"/>
+                    <field name="response_time" string="Response Time (s)"/>
+                    <field name="reviewed_at" string="Reviewed At"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- عرض نموذج تقدم البطاقة -->
+        <record id="view_session_card_progress_form" model="ir.ui.view">
+            <field name="name">session.card.progress.form</field>
+            <field name="model">session.card.progress</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="session_id" string="Session"/>
+                                <field name="card_id" string="Card"/>
+                                <field name="reviewed_at" string="Reviewed At"/>
+                            </group>
+                            <group>
+                                <field name="is_correct" string="Correct Answer"/>
+                                <field name="response_time" string="Response Time (seconds)"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Answer Details">
+                            <group>
+                                <label for="user_answer" string="User's Answer"/>
+                                <field name="user_answer" nolabel="1" readonly="1"/>
+                            </group>
+                            <group>
+                                <label for="correct_answer" string="Correct Answer"/>
+                                <div>
+                                    <t t-if="card_id">
+                                        <span t-field="card_id.answer" class="font-weight-bold text-success"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="text-muted">No card selected</span>
+                                    </t>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- إجراءات جلسات الدراسة -->
+        <record id="action_flashcard_sessions" model="ir.actions.act_window">
+            <field name="name">Study Sessions</field>
+            <field name="res_model">flashcard.session</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_my_sessions': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No study sessions yet!
+                </p>
+                <p>
+                    Start a new review or quiz session to track your learning progress.
+                </p>
+            </field>
+        </record>
+
+        <!-- إجراء تقدم البطاقات -->
+        <record id="action_session_card_progress" model="ir.actions.act_window">
+            <field name="name">Card Progress</field>
+            <field name="res_model">session.card.progress</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- إجراءات سريعة -->
+        <record id="action_start_review_session" model="ir.actions.server">
+            <field name="name">Start Review Session</field>
+            <field name="model_id" ref="model_flashcard_session"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['flashcard.session'].create_review_session()
+            </field>
+        </record>
+
+        <record id="action_start_quiz_session" model="ir.actions.server">
+            <field name="name">Start Quiz Session</field>
+            <field name="model_id" ref="model_flashcard_session"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['flashcard.session'].create_quiz_session()
+            </field>
+        </record>
+
+    </data>
+</odoo>

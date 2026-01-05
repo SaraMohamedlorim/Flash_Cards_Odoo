@@ -1,0 +1,557 @@
+/* ===== أنماط لوحة التحكم ===== */
+.flashcard-dashboard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.flashcard-stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.flashcard-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.flashcard-stat-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.flashcard-stat-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* ===== أنماط البطاقات التعليمية ===== */
+.flashcard-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.flashcard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.flashcard-card.easy {
+    border-left: 5px solid #28a745;
+}
+
+.flashcard-card.medium {
+    border-left: 5px solid #ffc107;
+}
+
+.flashcard-card.hard {
+    border-left: 5px solid #dc3545;
+}
+
+.flashcard-question {
+    background: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.flashcard-answer {
+    padding: 20px;
+    background: white;
+}
+
+/* ===== أنماط وضع المراجعة ===== */
+.review-mode-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.review-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.review-question {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+.review-answer {
+    font-size: 1.2em;
+    color: #27ae60;
+    font-weight: 500;
+    line-height: 1.6;
+    display: none;
+}
+
+.review-answer.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.review-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== أنماط شريط التقدم ===== */
+.progress-container {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.progress-bar {
+    height: 12px;
+    background: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+/* ===== أنماط الأزرار ===== */
+.btn-flashcard {
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-flashcard-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-flashcard-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-flashcard-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.btn-flashcard-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+}
+
+.btn-flashcard-danger {
+    background: linear-gradient(135deg, #dc3545, #e83e8c);
+    color: white;
+}
+
+.btn-flashcard-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+}
+
+.btn-flashcard-secondary {
+    background: linear-gradient(135deg, #6c757d, #adb5bd);
+    color: white;
+}
+
+.btn-flashcard-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+}
+
+/* ===== أنماط الفئات والعلامات ===== */
+.category-badge {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin: 2px;
+}
+
+.tag-badge {
+    display: inline-block;
+    background: #f3e5f5;
+    color: #7b1fa2;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    margin: 2px;
+    border: 1px solid #e1bee7;
+}
+
+.level-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.level-easy {
+    background: #d4edda;
+    color: #155724;
+}
+
+.level-medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.level-hard {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* ===== أنماط الجلسات ===== */
+.session-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 5px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.session-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.session-score {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.session-score-high {
+    color: #28a745;
+}
+
+.session-score-medium {
+    color: #ffc107;
+}
+
+.session-score-low {
+    color: #dc3545;
+}
+
+/* ===== أنماط الرسوم البيانية ===== */
+.chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* ===== أنماط الاستيراد والتصدير ===== */
+.import-export-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.import-export-icon {
+    font-size: 3em;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.import-export-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.import-export-description {
+    color: #6c757d;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* ===== أنماط التنبيهات والإشعارات ===== */
+.flashcard-alert {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid;
+}
+
+.alert-success {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+/* ===== أنماط الاستجابة للشاشات المختلفة ===== */
+@media (max-width: 768px) {
+    .review-card {
+        padding: 20px;
+        min-height: 200px;
+    }
+    
+    .review-question {
+        font-size: 1.1em;
+    }
+    
+    .review-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-flashcard {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .flashcard-stat-card {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .review-mode-container {
+        padding: 10px;
+    }
+    
+    .progress-container {
+        padding: 15px;
+    }
+    
+    .session-card {
+        padding: 15px;
+    }
+}
+
+/* ===== أنماط الحركات والتحويلات ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.flashcard-pulse {
+    animation: pulse 2s infinite;
+}
+
+.flashcard-fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+.flashcard-slide-in {
+    animation: slideIn 0.5s ease;
+}
+
+/* ===== أنماط إضافية للتخصيص ===== */
+.flashcard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.flashcard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 0 0 20px 20px;
+}
+
+.flashcard-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.flashcard-subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+/* ===== أنماط حالة البطاقات ===== */
+.card-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-new {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-reviewed {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.status-due {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+/* ===== أنماط التحميل ===== */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== أنماط الطباعة ===== */
+@media print {
+    .btn-flashcard,
+    .review-buttons,
+    .flashcard-header {
+        display: none !important;
+    }
+    
+    .flashcard-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+    
+    .review-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

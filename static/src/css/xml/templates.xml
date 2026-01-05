@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="template_flashcard_dashboard" name="Flashcard Dashboard">
+            <div class="flashcard-dashboard" t-name="Flash_Card.dashboard">
+                <div class="flashcard-header">
+                    <h1 class="flashcard-title">Flashcards Dashboard</h1>
+                    <p class="flashcard-subtitle">Track your learning progress</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="flashcard-stat-card">
+                        <span class="flashcard-stat-number" t-esc="widget.total_cards">0</span>
+                        <span class="flashcard-stat-label">Total Cards</span>
+                    </div>
+                    <div class="flashcard-stat-card">
+                        <span class="flashcard-stat-number" t-esc="widget.reviewed_today">0</span>
+                        <span class="flashcard-stat-label">Reviewed Today</span>
+                    </div>
+                    <div class="flashcard-stat-card">
+                        <span class="flashcard-stat-number" t-esc="widget.due_cards">0</span>
+                        <span class="flashcard-stat-label">Due for Review</span>
+                    </div>
+                    <div class="flashcard-stat-card">
+                        <span class="flashcard-stat-number" t-esc="widget.avg_success_rate">0%</span>
+                        <span class="flashcard-stat-label">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- قالب بطاقة المراجعة -->
+        <template id="template_review_card" name="Review Card">
+            <div t-name="Flash_Card.review_card">
+                <div class="review-card" t-att-data-card-id="card.id">
+                    <div class="review-question" t-esc="card.name"/>
+                    <div class="review-answer" t-esc="card.answer" style="display: none;"/>
+                    
+                    <div class="review-buttons">
+                        <button class="btn-flashcard btn-flashcard-secondary btn-show-answer">
+                            👁 Show Answer
+                        </button>
+                        <button class="btn-flashcard btn-flashcard-success btn-correct" style="display: none;">
+                            ✓ Correct
+                        </button>
+                        <button class="btn-flashcard btn-flashcard-danger btn-incorrect" style="display: none;">
+                            ✗ Incorrect
+                        </button>
+                        <button class="btn-flashcard btn-flashcard-primary btn-next" style="display: none;">
+                            ➡ Next Card
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- قالب نتائج الجلسة -->
+        <template id="template_session_results" name="Session Results">
+            <div t-name="Flash_Card.session_results">
+                <div class="import-export-card text-center">
+                    <div class="import-export-icon">🎉</div>
+                    <h3 class="import-export-title">Session Completed!</h3>
+                    <div t-att-class="'session-score ' + results.score_class">
+                        <t t-esc="results.score + '%'"/>
+                    </div>
+                    <p>
+                        You got <t t-esc="results.correct_answers"/> out of <t t-esc="results.total_cards"/> correct!
+                    </p>
+                    
+                    <div class="quick-actions">
+                        <button class="btn-flashcard btn-flashcard-primary btn-restart-session">
+                            🔄 Start New Session
+                        </button>
+                        <button class="btn-flashcard btn-flashcard-secondary btn-back-dashboard">
+                            📊 Back to Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- قالب شريط التقدم -->
+        <template id="template_progress_bar" name="Progress Bar">
+            <div t-name="Flash_Card.progress_bar">
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span t-esc="'Card ' + current_index + ' of ' + total_cards"/>
+                        <span t-esc="Math.round((current_index / total_cards) * 100) + '%'"/>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" t-att-style="'width: ' + (current_index / total_cards) * 100 + '%;'"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

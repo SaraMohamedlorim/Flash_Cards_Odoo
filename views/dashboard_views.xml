@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- عرض لوحة التحكم -->
+    <record id="view_flashcard_dashboard" model="ir.ui.view">
+        <field name="name">flashcard.dashboard.view</field>
+        <field name="model">flashcard.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Flashcards Dashboard" create="false" edit="false">
+                <sheet>
+                    <div class="o_dashboard">
+
+                        <!-- الإحصائيات الأساسية -->
+                        <div class="row mt16 mb16">
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="total_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Total Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="active_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Active Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="reviewed_today" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Reviewed Today</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="due_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Due for Review</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- المزيد من الإحصائيات -->
+                        <div class="row mb16">
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="avg_success_rate" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Average Success Rate</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="weekly_reviews" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Weekly Reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="monthly_reviews" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Monthly Reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="total_sessions" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Total Sessions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- البطاقات حسب الصعوبة -->
+                        <div class="row mb16">
+                            <div class="col-4">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="easy_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Easy Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="medium_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Medium Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2><field name="hard_cards" nolabel="1" readonly="1" widget="statinfo"/></h2>
+                                        <p>Hard Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الإجراءات السريعة والجلسات الأخيرة -->
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Quick Actions</h5>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <button type="object" name="action_quick_review" string="Start Review" class="btn btn-primary m-1"/>
+                                        <button type="object" name="action_quick_quiz" string="Start Quiz" class="btn btn-secondary m-1"/>
+                                        <button type="object" name="action_create_card" string="Create New Card" class="btn btn-success m-1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Recent Sessions</h5>
+                                    </div>
+                                    <div class="card-body ">
+                                        <field name="recent_sessions" nolabel="1" readonly="1" context="{'default_dashboard': active_id}">
+                                            <tree string="Recent Sessions" editable="bottom" create="false" delete="false">
+                                                <field name="session_id"/>
+                                                <field name="user_answer"/>
+                                                <field name="is_correct"/>
+                                                <field name="response_time"/>
+                                                <field name="reviewed_at"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- إجراء لفتح لوحة التحكم -->
+    <record id="action_flashcard_dashboard" model="ir.actions.act_window">
+        <field name="name">Flashcards Dashboard</field>
+        <field name="res_model">flashcard.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_flashcard_dashboard"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- عنصر القائمة -->
+    <menuitem id="menu_flashcards_dashboard"
+              name="Dashboard"
+              parent="menu_flashcards_root"
+              action="action_flashcard_dashboard"
+              sequence="1"/>
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- فئات البطاقات التعليمية الأساسية -->
+        <record id="category_languages" model="flashcard.category">
+            <field name="name">Languages</field>
+            <field name="description">Vocabulary and grammar for different languages</field>
+        </record>
+
+        <record id="category_programming" model="flashcard.category">
+            <field name="name">Programming</field>
+            <field name="description">Programming concepts, syntax, and algorithms</field>
+        </record>
+
+        <record id="category_science" model="flashcard.category">
+            <field name="name">Science</field>
+            <field name="description">Scientific concepts and facts</field>
+        </record>
+
+        <record id="category_math" model="flashcard.category">
+            <field name="name">Mathematics</field>
+            <field name="description">Mathematical formulas and concepts</field>
+        </record>
+
+        <record id="category_history" model="flashcard.category">
+            <field name="name">History</field>
+            <field name="description">Historical events and figures</field>
+        </record>
+
+        <record id="category_geography" model="flashcard.category">
+            <field name="name">Geography</field>
+            <field name="description">Countries, capitals, and geographical features</field>
+        </record>
+
+        <record id="category_medicine" model="flashcard.category">
+            <field name="name">Medicine</field>
+            <field name="description">Medical terms and concepts</field>
+        </record>
+
+        <record id="category_law" model="flashcard.category">
+            <field name="name">Law</field>
+            <field name="description">Legal terms and principles</field>
+        </record>
+
+        <!-- العلامات -->
+        <record id="tag_vocabulary" model="flashcard.tag">
+            <field name="name">Vocabulary</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="tag_grammar" model="flashcard.tag">
+            <field name="name">Grammar</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="tag_formula" model="flashcard.tag">
+            <field name="name">Formula</field>
+            <field name="color">3</field>
+        </record>
+
+        <record id="tag_concept" model="flashcard.tag">
+            <field name="name">Concept</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="tag_dates" model="flashcard.tag">
+            <field name="name">Important Dates</field>
+            <field name="color">5</field>
+        </record>
+
+        <record id="tag_definitions" model="flashcard.tag">
+            <field name="name">Definitions</field>
+            <field name="color">6</field>
+        </record>
+
+        <record id="tag_procedures" model="flashcard.tag">
+            <field name="name">Procedures</field>
+            <field name="color">7</field>
+        </record>
+
+        <record id="tag_theorems" model="flashcard.tag">
+            <field name="name">Theorems</field>
+            <field name="color">8</field>
+        </record>
+    </data>
+</odoo>

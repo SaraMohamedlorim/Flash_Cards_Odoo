@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- قالب لوحة التحكم -->
+    <t t-name="FlashcardDashboard">
+        <div class="flashcard-dashboard">
+            <div class="flashcard-header">
+                <h1 class="flashcard-title">Flashcards Dashboard</h1>
+                <p class="flashcard-subtitle">Track your learning progress</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="flashcard-stat-card">
+                    <span class="flashcard-stat-number" t-esc="widget.total_cards">0</span>
+                    <span class="flashcard-stat-label">Total Cards</span>
+                </div>
+                <div class="flashcard-stat-card">
+                    <span class="flashcard-stat-number" t-esc="widget.reviewed_today">0</span>
+                    <span class="flashcard-stat-label">Reviewed Today</span>
+                </div>
+                <div class="flashcard-stat-card">
+                    <span class="flashcard-stat-number" t-esc="widget.due_cards">0</span>
+                    <span class="flashcard-stat-label">Due for Review</span>
+                </div>
+                <div class="flashcard-stat-card">
+                    <span class="flashcard-stat-number" t-esc="widget.avg_success_rate">0%</span>
+                    <span class="flashcard-stat-label">Success Rate</span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب بطاقة المراجعة -->
+    <t t-name="ReviewCard">
+        <div class="review-card" t-att-data-card-id="card.id">
+            <div class="review-question" t-esc="card.question"/>
+            <div class="review-answer" t-esc="card.answer"/>
+            
+            <div class="review-buttons">
+                <button class="btn-flashcard btn-flashcard-secondary btn-show-answer">
+                    👁 Show Answer
+                </button>
+                <button class="btn-flashcard btn-flashcard-success btn-correct" style="display: none;">
+                    ✓ Correct
+                </button>
+                <button class="btn-flashcard btn-flashcard-danger btn-incorrect" style="display: none;">
+                    ✗ Incorrect
+                </button>
+                <button class="btn-flashcard btn-flashcard-primary btn-next" style="display: none;">
+                    ➡ Next Card
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب شريط التقدم -->
+    <t t-name="ProgressBar">
+        <div class="progress-container">
+            <div class="progress-info">
+                <span t-esc="'Card ' + current_index + ' of ' + total_cards"/>
+                <span t-esc="Math.round((current_index / total_cards) * 100) + '%'"/>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" t-att-style="'width: ' + (current_index / total_cards) * 100 + '%;'"/>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب بطاقة الاختبار -->
+    <t t-name="QuizCard">
+        <div class="review-card" t-att-data-card-id="card.id">
+            <div class="review-question" t-esc="card.question"/>
+            
+            <div class="form-group">
+                <input type="text" 
+                       class="form-control answer-input" 
+                       placeholder="Type your answer here..."
+                       t-att-id="'answer-input-' + card.id"/>
+            </div>
+            
+            <div class="review-buttons">
+                <button class="btn-flashcard btn-flashcard-primary btn-submit-answer">
+                    📝 Submit Answer
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب نتائج الجلسة -->
+    <t t-name="SessionResults">
+        <div class="import-export-card text-center">
+            <div class="import-export-icon">🎉</div>
+            <h3 class="import-export-title" t-esc="title"/>
+            
+            <div t-att-class="'session-score ' + score_class" t-esc="score + '%'"/>
+            
+            <p>
+                <t t-esc="'You got ' + correct_answers + ' out of ' + total_cards + ' correct!'"/>
+            </p>
+            
+            <div class="quick-actions">
+                <button class="btn-flashcard btn-flashcard-primary" t-att-data-action="restart_action">
+                    🔄 Start New Session
+                </button>
+                <button class="btn-flashcard btn-flashcard-secondary" t-att-data-action="dashboard_action">
+                    📊 Back to Dashboard
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب إحصائيات الفئات -->
+    <t t-name="CategoryStats">
+        <div class="chart-container">
+            <h4 class="chart-title">Performance by Category</h4>
+            <canvas t-att-id="'categoryChart'" width="400" height="200"/>
+        </div>
+    </t>
+
+    <!-- قالب بطاقة سريعة -->
+    <t t-name="QuickCard">
+        <div t-att-class="'flashcard-card ' + card.level">
+            <div class="flashcard-question" t-esc="card.name"/>
+            <div class="flashcard-answer" t-esc="card.answer"/>
+            
+            <div class="card-footer">
+                <span t-att-class="'level-badge level-' + card.level" t-esc="card.level"/>
+                <span t-if="card.category_id" class="category-badge" t-esc="card.category_id[1]"/>
+                
+                <t t-foreach="card.tag_ids" t-as="tag">
+                    <span class="tag-badge" t-esc="tag[1]"/>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب بدون بطاقات -->
+    <t t-name="NoCardsTemplate">
+        <div class="import-export-card text-center">
+            <div class="import-export-icon">📝</div>
+            <h3 class="import-export-title">No Flashcards Available</h3>
+            <p class="import-export-description">
+                You haven't created any flashcards yet. Start by creating your first flashcard!
+            </p>
+            <button class="btn-flashcard btn-flashcard-primary" t-att-data-action="create_card_action">
+                ➕ Create Your First Card
+            </button>
+        </div>
+    </t>
+
+    <!-- قالب تحميل -->
+    <t t-name="LoadingSpinner">
+        <div class="text-center">
+            <div class="loading-spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </t>
+
+</templates>

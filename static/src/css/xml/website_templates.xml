@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- قالب صفحة المراجعة -->
+    <t t-name="website_flashcard_review">
+        <div t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="review-mode-container">
+                    <t t-if="cards">
+                        <t t-call="ProgressBar">
+                            <t t-set="current_index" t-value="card_index"/>
+                            <t t-set="total_cards" t-value="total_cards"/>
+                        </t>
+                        
+                        <t t-call="ReviewCard">
+                            <t t-set="card" t-value="current_card"/>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-call="NoCardsTemplate"/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب صفحة الاختبار -->
+    <t t-name="website_flashcard_quiz">
+        <div t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="review-mode-container">
+                    <t t-if="cards">
+                        <t t-call="ProgressBar">
+                            <t t-set="current_index" t-value="card_index"/>
+                            <t t-set="total_cards" t-value="total_cards"/>
+                        </t>
+                        
+                        <t t-call="QuizCard">
+                            <t t-set="card" t-value="current_card"/>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-call="NoCardsTemplate"/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- قالب صفحة النتائج -->
+    <t t-name="website_flashcard_results">
+        <div t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="review-mode-container">
+                    <t t-call="SessionResults">
+                        <t t-set="title" t-value="session_result.title"/>
+                        <t t-set="score" t-value="session_result.score"/>
+                        <t t-set="score_class" t-value="session_result.score_class"/>
+                        <t t-set="correct_answers" t-value="session_result.correct_answers"/>
+                        <t t-set="total_cards" t-value="session_result.total_cards"/>
+                        <t t-set="restart_action" t-value="session_result.restart_action"/>
+                        <t t-set="dashboard_action" t-value="session_result.dashboard_action"/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

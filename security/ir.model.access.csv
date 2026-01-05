@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_flashcard_card_user,flashcard.card.user,model_flashcard_card,base.group_user,1,1,1,1
+access_flashcard_category_user,flashcard.category.user,model_flashcard_category,base.group_user,1,1,1,0
+access_flashcard_tag_user,flashcard.tag.user,model_flashcard_tag,base.group_user,1,1,1,0
+access_flashcard_session_user,flashcard.session.user,model_flashcard_session,base.group_user,1,1,1,1
+access_session_card_progress_user,session.card.progress.user,model_session_card_progress,base.group_user,1,0,1,0
+access_flashcard_import_export_user,flashcard.import.export.user,model_flashcard_import_export,base.group_user,1,1,1,1
+access_flashcard_import_history_user,flashcard.import.history.user,model_flashcard_import_history,base.group_user,1,1,1,1
+access_flashcard_export_history_user,flashcard.export.history.user,model_flashcard_export_history,base.group_user,1,1,1,1
+access_flashcard_dashboard_user,flashcard.dashboard.user,model_flashcard_dashboard,base.group_user,1,1,1,1

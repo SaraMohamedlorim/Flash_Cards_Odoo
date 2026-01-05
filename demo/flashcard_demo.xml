@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- جلسات تجريبية -->
+        <record id="demo_session_1" model="flashcard.session">
+            <field name="name">Programming Concepts Review</field>
+            <field name="session_type">review</field>
+            <field name="state">completed</field>
+            <field name="total_cards">5</field>
+            <field name="completed_cards">5</field>
+            <field name="correct_answers">4</field>
+            <field name="start_time">2024-01-15 10:00:00</field>
+            <field name="end_time">2024-01-15 10:15:00</field>
+            <field name="card_ids" eval="[(6, 0, [ref('demo_card_1'), ref('demo_card_2'), ref('demo_card_3')])]"/>
+        </record>
+
+        <record id="demo_session_2" model="flashcard.session">
+            <field name="name">General Knowledge Quiz</field>
+            <field name="session_type">quiz</field>
+            <field name="state">completed</field>
+            <field name="total_cards">8</field>
+            <field name="completed_cards">8</field>
+            <field name="correct_answers">6</field>
+            <field name="start_time">2024-01-16 14:30:00</field>
+            <field name="end_time">2024-01-16 14:50:00</field>
+            <field name="card_ids" eval="[(6, 0, [ref('demo_card_4'), ref('demo_card_8'), ref('demo_card_9')])]"/>
+        </record>
+
+        <!-- تقدم البطاقات في الجلسات -->
+        <record id="demo_progress_1" model="session.card.progress">
+            <field name="session_id" ref="demo_session_1"/>
+            <field name="card_id" ref="demo_card_1"/>
+            <field name="is_correct">True</field>
+            <field name="user_answer">Object-Oriented Programming</field>
+            <field name="response_time">15.5</field>
+            <field name="reviewed_at">2024-01-15 10:01:00</field>
+        </record>
+
+        <record id="demo_progress_2" model="session.card.progress">
+            <field name="session_id" ref="demo_session_1"/>
+            <field name="card_id" ref="demo_card_2"/>
+            <field name="is_correct">True</field>
+            <field name="user_answer">Encapsulation, Abstraction, Inheritance, Polymorphism</field>
+            <field name="response_time">25.2</field>
+            <field name="reviewed_at">2024-01-15 10:05:00</field>
+        </record>
+
+    </data>
+</odoo>

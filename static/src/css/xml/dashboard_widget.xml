@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- ويدجت لوحة التحكم -->
+    <t t-name="DashboardWidget">
+        <div class="o_dashboard">
+            <!-- بطاقات الإحصائيات -->
+            <div class="row mt16 mb16">
+                <div class="col-3" t-foreach="widget.stat_cards" t-as="stat">
+                    <div class="card" t-att-class="stat.css_class">
+                        <div class="card-body text-center">
+                            <h2>
+                                <span t-field="stat.value" t-options='{"widget": "statinfo"}'/>
+                            </h2>
+                            <p t-esc="stat.label"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار سريعة -->
+            <div class="row mt16 mb16">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <button t-foreach="widget.quick_actions" t-as="action"
+                                    t-att-type="action.type"
+                                    t-att-class="'btn ' + action.css_class + ' mr-2'"
+                                    t-att-name="action.name"
+                                    t-esc="action.string"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الرسوم البيانية -->
+            <div class="row mt16 mb16">
+                <div class="col-6">
+                    <div t-call="CategoryStats"/>
+                </div>
+                <div class="col-6">
+                    <div class="chart-container">
+                        <h4 class="chart-title">Weekly Progress</h4>
+                        <canvas id="weeklyProgressChart" width="400" height="200"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

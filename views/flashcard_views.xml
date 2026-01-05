@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- عرض شجرة البطاقات -->
+    <record id="view_flashcard_card_tree" model="ir.ui.view">
+        <field name="name">flashcard.card.tree</field>
+        <field name="model">flashcard.card</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Question"/>
+                <field name="category_id"/>
+                <field name="level"/>
+                <field name="review_count"/>
+                <field name="success_rate"/>
+                <field name="last_reviewed"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- عرض نموذج البطاقة -->
+    <record id="view_flashcard_card_form" model="ir.ui.view">
+        <field name="name">flashcard.card.form</field>
+        <field name="model">flashcard.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start_review" type="object" string="Start Review" class="btn-primary"/>
+                    <button name="action_start_quiz" type="object" string="Start Quiz" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Question" placeholder="Enter your question here..."/>
+                            <field name="answer" placeholder="Enter the answer here..." nolabel="1"/>
+                        </group>
+                        <group>
+                            <field name="category_id"/>
+                            <field name="level"/>
+                            <field name="tag_ids"
+                               widget="many2many_tags" 
+                               options="{'color_field': 'color'}" 
+                               placeholder="Add tags..."/>
+                        </group>
+                    </group>
+                    <group string="Statistics">
+                        <group>
+                            <field name="review_count" readonly="1"/>
+                            <field name="correct_count" readonly="1"/>
+                            <field name="success_rate" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="last_reviewed" readonly="1"/>
+                            <field name="next_review_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- عرض البحث -->
+    <record id="view_flashcard_card_search" model="ir.ui.view">
+        <field name="name">flashcard.card.search</field>
+        <field name="model">flashcard.card</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="level"/>
+                <field name="tag_ids"/>
+                <filter string="Easy" name="easy" domain="[('level','=','easy')]"/>
+                <filter string="Medium" name="medium" domain="[('level','=','medium')]"/>
+                <filter string="Hard" name="hard" domain="[('level','=','hard')]"/>
+                <filter string="Never Reviewed" name="never_reviewed" domain="[('review_count','=',0)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="category" context="{'group_by': 'category_id'}"/>
+                    <filter string="Level" name="level" context="{'group_by': 'level'}"/>
+                    <filter string="Tags" name="tags" context="{'group_by': 'tag_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- عرض لوحة التحكم -->
+    <record id="view_flashcard_dashboard" model="ir.ui.view">
+        <field name="name">flashcard.dashboard</field>
+        <field name="model">flashcard.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="o_dashboard">
+                        <div class="row mt16 mb16">
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2>
+                                            <field name="card_count" readonly="1" nolabel="1"
+                                                   class="font-weight-bold"
+                                                   widget="statinfo"
+                                                   options="{'background_color': 'bg-primary'}"/>
+                                        </h2>
+                                        <p>Total Cards</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2>
+                                            <field name="reviewed_today" readonly="1" nolabel="1"
+                                                   class="font-weight-bold"
+                                                   widget="statinfo"/>
+                                        </h2>
+                                        <p>Reviewed Today</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2>
+                                            <field name="due_cards" readonly="1" nolabel="1"
+                                                   class="font-weight-bold"
+                                                   widget="statinfo"/>
+                                        </h2>
+                                        <p>Due for Review</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h2>
+                                            <field name="avg_success_rate" readonly="1" nolabel="1"
+                                                   class="font-weight-bold"
+                                                   widget="statinfo"/>
+                                        </h2>
+                                        <p>Average Success Rate</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- إجراءات -->
+    <record id="action_flashcard_cards" model="ir.actions.act_window">
+        <field name="name">Flashcards</field>
+        <field name="res_model">flashcard.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_my_cards': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first flashcard!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_flashcard_categories" model="ir.actions.act_window">
+    <field name="name">Flashcard Categories</field>
+    <field name="res_model">flashcard.category</field>
+    <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="action_flashcard_sessions" model="ir.actions.act_window">
+    <field name="name">Study Sessions</field>
+    <field name="res_model">flashcard.session</field>
+    <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- القوائم -->
+    <menuitem id="menu_flashcards_root" name="Flashcards"/>
+    <menuitem id="menu_flashcards_cards" name="My Cards" parent="menu_flashcards_root" action="action_flashcard_cards"/>
+    <menuitem id="menu_flashcards_categories" name="Categories" parent="menu_flashcards_root" action="action_flashcard_categories"/>
+    <menuitem id="menu_flashcards_sessions" name="Study Sessions" parent="menu_flashcards_root" action="action_flashcard_sessions"/>
+</odoo>
